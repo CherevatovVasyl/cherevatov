@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html ng-app="DirectoryApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DirectoriesBrowser</title>
+
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+
+    <script src="~/scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/angular.min.js"></script> 
+    <script src="~/scripts/Controllers/DirectoryManager.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <h3>Directories Browser</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content" ng-controller="DirectoryController">
+        <div class="navbar-left row-fluid navbar-fixed-left">
+            <div class="navbar-inner">
+                <div>
+                    <button class="menuBtn" ng-click="GetDrives()">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </button>
+                </div>
+                <div>
+                    <button class="menuBtn" ng-click="GetPrevDir(Directory.Name)">
+                        <span class="glyphicon glyphicon-arrow-up"></span>
+                    </button>
+                </div>
+                <div>
+                    <button class="menuBtn" ng-click="GetFileCnt()">
+                        Show count of files
+                    </button>
+                </div> 
+
+                <div class="fileCount DivInBorder">
+                    <div>
+                        <div>
+                            <= 10mb
+                        </div>
+                        <div class="DivInBorder">
+                            {{Cnt.Less10MbCount}}
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            > 10mb AND <= 50mb
+                        </div>
+                        <div class="DivInBorder">
+                            {{Cnt.More10Less50MbCount}}
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            >= 100mb
+                        </div>
+                        <div class="DivInBorder">
+                            {{Cnt.More50MbCount}}
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        
+
+        <div class="main" >
+            <div id="mainName">{{Directory.Name}}</div>
+            <div ng-repeat="subDir in Directory.Subdirectories">
+                <button class="dirBtn" ng-click="GetNewDir(subDir)">
+                    <span class="glyphicon glyphicon-folder-open glyphiconMin"></span> {{subDir}}
+                </button>
+            </div>
+            <div class="files" >
+                <div ng-repeat="file in Directory.Files">
+                    <div class="fileText">
+                        <span class="glyphicon glyphicon-file glyphiconMin"></span> {{file}}
+                    </div>
+                </div>
+
+            </div>
+                  
+        </div>
+    </div>
+
+    
+</body>
+</html>
